@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# 2014-10-21:v2
+
+CACHE:
+index.html
+pacecalc.css
+pacecalc.js
+
+NETWORK:
+*
+
+FALLBACK:
+/ fallback.html

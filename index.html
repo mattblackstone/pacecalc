@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="pacecalc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes"> <!-- Android -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Pace Calc">
+    <link rel="shortcut icon" sizes="196x196" href="icons/apple-touch-icon-180x180.png"> <!-- Android -->
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
+    <title>Pace Conversions</title>
+</head>
+<body>
+  <div id="calculator">
+    <table>
+      <tr id="row_distance">
+        <td width=56%><input id="distance" type="number" min="0" max="99999" /></td>
+        <td width=14%>Distance</td>
+        <td width=14%>
+          <select id="units">
+            <option value="mi">Miles</option>
+            <option value="km">KMs</option>
+            <option value="yd">Yards</option>
+            <option value="m">Meters</option>
+          </select>
+        </td>
+      </tr>
+      <tr id="row_time">
+        <td><input class="time" id="hours" type="number" min="0" max="24" placeholder="hrs" /><input class="time" id="minutes" type="number" min="0" max="59" placeholder="min" /><input class="time" id="seconds" type="number" min="0" max="59" placeholder="sec" /></td>
+        <td>Time</td>
+        <td></td>
+      </tr>
+      <tr id="row_speed">
+        <td><input id="speed" type="number" min="0" max="99999" /></td>
+        <td>Speed</td>
+        <td>
+          <select id="speed_units">
+            <option value="mph">MPH</option>
+            <option value="kph">KPH</option>
+          </select>
+        </td>
+      </tr>
+      <tr id="row_pace">
+        <td><input class="time" id="pace_hrs" type="number" min="0" max="24" placeholder="hrs" style="visibility:hidden" /><input class="time" id="pace_min" type="number" min="0" max="59" placeholder="min" /><input class="time" id="pace_sec" type="number" min="0" max="59" placeholder="sec" /></td>
+        <td>Pace</td>
+        <td>
+          <select id="pace_units">
+            <option value="mpm">/Mile</option>
+            <option value="mpk">/Km</option>
+            <option value="mp100yd">/100yd</option>
+            <option value="mp100m">/100m</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=3><input type="submit" value="Calculate" id="btn_calculate">&nbsp&nbsp<input type="submit" value="Clear All" id="btn_clear"></td>
+      </tr>
+      <tr>
+        <td colspan=3><hr></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td width=28% class="tight"><h2>Time:</h2></td>
+        <td width=28% class="tight"><span id="time"></span></td>
+        <td width=28% class="tight"></td>
+      </tr>
+      <tr>
+        <td colspan=3><hr></td>
+      </tr>
+      <tr>
+        <td width=28% class="tight"><h2>Standard:</h2></td>
+        <td width=28% class="tight"><span id="miles"> miles</span></td>
+        <td width=28% class="tight"><span id="yards"> yards</span></td>
+      </tr>
+      <tr>
+        <td><span id="miles_per_hour">mph</span></td>
+        <td><span id="minutes_per_mile">/mile</span></td>
+        <td><span id="minutes_per_100yd">/100yd</span></td>
+      </tr>
+      <tr>
+        <td colspan=3><hr></td>
+      </tr>
+      <tr>
+        <td class="tight"><h2>Metric:</h2></td>
+        <td class="tight"><span id="kilometers"> km</span></td>
+        <td class="tight"><span id="meters"> meters</span></td>
+      </tr>
+      <tr>
+        <td><span id="km_per_hour">km/h</span></td>
+        <td><span id="minutes_per_km">/km</span></td>
+        <td><span id="minutes_per_100m">/100m</span></td>
+      </tr>
+    </table>
+  </div>
+
+<script language="Javascript" type="text/javascript" src="pacecalc.js"></script>
+<!--script language="Javascript" type="text/javascript" src="prefixfree.min.js"></script--> <!-- PrefixFree util automatically handles browser prefixes like -moz-, -webkit- etc -->
+</body>
+</html>
