@@ -337,11 +337,11 @@ function initCalc(){
       mph = kph * k2m;
     }
     else if(pace_units == "mp100yd"){
-      mph = minpace * 3.40909091;
+      mph = (1 / minpace) * 3.40909091;
       kph = mph * m2k;
     }
     else if(pace_units == "mp100m"){
-      kph = minpace * 6;
+      kph = (1 / minpace) * 6;
       mph = kph * k2m;
     }
   }
