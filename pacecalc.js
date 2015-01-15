@@ -1,30 +1,33 @@
 function initCalc(){
-  var doc = document;
 
-  var input_dist = doc.getElementById('distance');
-  var input_dist_units = doc.getElementById('units');
-  var input_time_hrs = doc.getElementById('hours');
-  var input_time_min = doc.getElementById('minutes');
-  var input_time_sec = doc.getElementById('seconds');
-  var input_speed = doc.getElementById('speed');
-  var input_speed_units = doc.getElementById('speed_units');
-  var input_pace_hrs = doc.getElementById('pace_hrs');
-  var input_pace_min = doc.getElementById('pace_min');
-  var input_pace_sec = doc.getElementById('pace_sec');
-  var input_pace_units = doc.getElementById('pace_units');
+  getEl = function(el) {
+    return document.getElementById(el);
+  }
+
+  var input_dist = getEl('distance');
+  var input_dist_units = getEl('units');
+  var input_time_hrs = getEl('hours');
+  var input_time_min = getEl('minutes');
+  var input_time_sec = getEl('seconds');
+  var input_speed = getEl('speed');
+  var input_speed_units = getEl('speed_units');
+  var input_pace_hrs = getEl('pace_hrs');
+  var input_pace_min = getEl('pace_min');
+  var input_pace_sec = getEl('pace_sec');
+  var input_pace_units = getEl('pace_units');
   var inputs = [input_dist, input_time_hrs, input_time_min, input_time_sec, input_speed, input_pace_hrs, input_pace_min, input_pace_sec];
 
-  var output_time = doc.getElementById('time');
-  var output_miles = doc.getElementById('miles');
-  var output_yards = doc.getElementById('yards');
-  var output_kilometers = doc.getElementById('kilometers');
-  var output_meters = doc.getElementById('meters');
-  var output_mph = doc.getElementById('miles_per_hour');
-  var output_kph = doc.getElementById('km_per_hour');
-  var output_mpm = doc.getElementById('minutes_per_mile');
-  var output_mpk = doc.getElementById('minutes_per_km');
-  var output_mp100yd = doc.getElementById('minutes_per_100yd');
-  var output_mp100m = doc.getElementById('minutes_per_100m');
+  var output_time = getEl('time');
+  var output_miles = getEl('miles');
+  var output_yards = getEl('yards');
+  var output_kilometers = getEl('kilometers');
+  var output_meters = getEl('meters');
+  var output_mph = getEl('miles_per_hour');
+  var output_kph = getEl('km_per_hour');
+  var output_mpm = getEl('minutes_per_mile');
+  var output_mpk = getEl('minutes_per_km');
+  var output_mp100yd = getEl('minutes_per_100yd');
+  var output_mp100m = getEl('minutes_per_100m');
   var outputs = [output_time, output_miles, output_yards, output_kilometers, output_meters, output_mph, output_kph, output_mpm, output_mpk, output_mp100yd, output_mp100m];
 
   output_time.data = output_time.innerHTML;
@@ -39,12 +42,12 @@ function initCalc(){
   output_mp100yd.data = output_mp100yd.innerHTML;
   output_mp100m.data = output_mp100m.innerHTML;
   
-  var btn_calculate = doc.getElementById('btn_calculate');
-  var btn_clear = doc.getElementById('btn_clear');
-  var row_distance = doc.getElementById('row_distance');
-  var row_time = doc.getElementById('row_time');
-  var row_speed = doc.getElementById('row_speed');
-  var row_pace = doc.getElementById('row_pace');
+  var btn_calculate = getEl('btn_calculate');
+  var btn_clear = getEl('btn_clear');
+  var row_distance = getEl('row_distance');
+  var row_time = getEl('row_time');
+  var row_speed = getEl('row_speed');
+  var row_pace = getEl('row_pace');
 
   var distance;
   var dist_units;
