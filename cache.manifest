@@ -1,5 +1,9 @@
 CACHE MANIFEST
+<<<<<<< HEAD
 # 2015-03-10:v2
+=======
+# 2014-11-30:v1
+>>>>>>> 550c244ba6111843b64e41407ceb2458108ccc47
 
 CACHE:
 index.html
