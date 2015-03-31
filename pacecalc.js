@@ -1,31 +1,33 @@
-function initCalc(){
-  var doc = document;
+function initCalc() {
+  getEl = function(elem) {
+    return document.getElementById(elem);
+  }
 
-  var input_dist = doc.getElementById('distance');
-  var input_dist_units = doc.getElementById('units');
-  var input_time_hrs = doc.getElementById('hours');
-  var input_time_min = doc.getElementById('minutes');
-  var input_time_sec = doc.getElementById('seconds');
-  var input_speed = doc.getElementById('speed');
-  var input_speed_units = doc.getElementById('speed_units');
-  var input_pace_hrs = doc.getElementById('pace_hrs');
-  var input_pace_min = doc.getElementById('pace_min');
-  var input_pace_sec = doc.getElementById('pace_sec');
-  var input_pace_units = doc.getElementById('pace_units');
-  var inputs = [input_dist, input_time_hrs, input_time_min, input_time_sec, input_speed, input_pace_hrs, input_pace_min, input_pace_sec];
+  var input_dist = getEl('distance'),
+      input_dist_units = getEl('units'),
+      input_time_hrs = getEl('hours'),
+      input_time_min = getEl('minutes'),
+      input_time_sec = getEl('seconds'),
+      input_speed = getEl('speed'),
+      input_speed_units = getEl('speed_units'),
+      input_pace_hrs = getEl('pace_hrs'),
+      input_pace_min = getEl('pace_min'),
+      input_pace_sec = getEl('pace_sec'),
+      input_pace_units = getEl('pace_units'),
+      inputs = [input_dist, input_time_hrs, input_time_min, input_time_sec, input_speed, input_pace_hrs, input_pace_min, input_pace_sec];
 
-  var output_time = doc.getElementById('time');
-  var output_miles = doc.getElementById('miles');
-  var output_yards = doc.getElementById('yards');
-  var output_kilometers = doc.getElementById('kilometers');
-  var output_meters = doc.getElementById('meters');
-  var output_mph = doc.getElementById('miles_per_hour');
-  var output_kph = doc.getElementById('km_per_hour');
-  var output_mpm = doc.getElementById('minutes_per_mile');
-  var output_mpk = doc.getElementById('minutes_per_km');
-  var output_mp100yd = doc.getElementById('minutes_per_100yd');
-  var output_mp100m = doc.getElementById('minutes_per_100m');
-  var outputs = [output_time, output_miles, output_yards, output_kilometers, output_meters, output_mph, output_kph, output_mpm, output_mpk, output_mp100yd, output_mp100m];
+  var output_time = getEl('time'),
+      output_miles = getEl('miles'),
+      output_yards = getEl('yards'),
+      output_kilometers = getEl('kilometers'),
+      output_meters = getEl('meters'),
+      output_mph = getEl('miles_per_hour'),
+      output_kph = getEl('km_per_hour'),
+      output_mpm = getEl('minutes_per_mile'),
+      output_mpk = getEl('minutes_per_km'),
+      output_mp100yd = getEl('minutes_per_100yd'),
+      output_mp100m = getEl('minutes_per_100m'),
+      outputs = [output_time, output_miles, output_yards, output_kilometers, output_meters, output_mph, output_kph, output_mpm, output_mpk, output_mp100yd, output_mp100m];
 
   output_time.data = output_time.innerHTML;
   output_miles.data = output_miles.innerHTML;
@@ -39,37 +41,39 @@ function initCalc(){
   output_mp100yd.data = output_mp100yd.innerHTML;
   output_mp100m.data = output_mp100m.innerHTML;
   
-  var btn_calculate = doc.getElementById('btn_calculate');
-  var btn_clear = doc.getElementById('btn_clear');
-  var row_distance = doc.getElementById('row_distance');
-  var row_time = doc.getElementById('row_time');
-  var row_speed = doc.getElementById('row_speed');
-  var row_pace = doc.getElementById('row_pace');
+  var btn_calculate = getEl('btn_calculate'),
+      btn_clear = getEl('btn_clear'),
+      row_distance = getEl('row_distance'),
+      row_time = getEl('row_time'),
+      row_speed = getEl('row_speed'),
+      row_pace = getEl('row_pace');
 
-  var distance;
-  var dist_units;
-  var time;
-  var pace;
-  var pace_units;
-  var speed;
-  var speed_units;
+  var distance,
+      dist_units,
+      time,
+      time_sec,
+      pace,
+      pace_units,
+      speed,
+      speed_units;
 
-  var hours;
-  var minutes;
-  var seconds;
-  var miles;
-  var yards;
-  var kilometers;
-  var meters;
-  var mph;
-  var kph;
-  var mpm;
-  var mpk;
-  var mp100yd;
-  var mp100m;
-  var m2k = 1.60934;     // miles to kilometers
-  var k2m = 0.621371;    // kilometers to miles
-  var y2m = 0.000568182; // yards to miles
+  var hours,
+      minutes,
+      seconds,
+      miles,
+      yards,
+      kilometers,
+      meters,
+      mps,
+      mph,
+      kph,
+      mpm,
+      mpk,
+      mp100yd,
+      mp100m,
+      m2k = 1.60934,     /* miles to kilometers */
+      k2m = 0.621371,    /* kilometers to miles */
+      y2m = 0.000568182; /* yards to miles */
 
   btn_calculate.addEventListener('click', output, false);
   btn_clear.addEventListener('click', clearAll, false);
@@ -82,171 +86,128 @@ function initCalc(){
     }
   }
 
-  console.log('Local Storage: '+supports_html5_storage());
+  console.log('Local Storage: ' + supports_html5_storage());
 
-  function clearAll(){
+  function clearAll() {
     var i = inputs.length;
-    while(i--){
+    while (i--) {
       inputs[i].value = "";
     }
     var j = outputs.length;
-    while(j--){
+    while (j--) {
       outputs[j].innerHTML = outputs[j].data;
     }
   }
 
-  function output(){
-    if(input_dist.value){
-      if(input_time_hrs.value || input_time_min.value || input_time_sec.value){
+  function output() {
+    if (input_dist.value) {
+      if (input_time_hrs.value || input_time_min.value || input_time_sec.value) {
         outputPace();
-      }
-      else if(input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
-        if (input_speed.value){
+      } else if (input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
+        if (input_speed.value) {
           outputTimeBySpeed();
-        }
-        else if(input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
+        } else if (input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
           outputTimeByPace();
-        }
-        else{
+        } else {
           alert("Please enter a valid pace or speed");
         }
-      }
-      else{
+      } else {
         alert("Please enter a valid time, speed or pace");
       }
-    }
-    else if(input_time_hrs.value || input_time_min.value || input_time_sec.value){
-      if(input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
-        if (input_speed.value){
+    } else if (input_time_hrs.value || input_time_min.value || input_time_sec.value) {
+      if (input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
+        if (input_speed.value) {
           outputDistanceBySpeed();
-        }
-        else if(input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
+        } else if (input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
           outputDistanceByPace();
-        }
-        else{
+        } else {
           alert("Please enter a valid pace or speed");
         }
-      }
-      else{
+      } else {
         alert("Please enter a valid distance, pace or speed")
       }
-    }
-    else if(input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
-      if (input_speed.value){
-        if(input_dist.value || input_time_hrs.value || input_time_min.value || input_time_sec.value){
-          if(input_dist.value){
+    } else if (input_speed.value || input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
+      if (input_speed.value) {
+        if (input_dist.value || input_time_hrs.value || input_time_min.value || input_time_sec.value) {
+          if (input_dist.value) {
             outputTimeBySpeed();
-          }
-          else if(input_time_hrs.value || input_time_min.value || input_time_sec.value){
+          } else if (input_time_hrs.value || input_time_min.value || input_time_sec.value) {
             outputDistanceBySpeed();
-          }
-          else{
+          } else {
             alert("Please enter a valid distance or time");
           }
-        }
-        else{
+        } else {
           alert("Please enter a valid distance or time");
         }
-      }
-      else if(input_pace_hrs.value || input_pace_min.value || input_pace_sec.value){
-        if(input_dist.value || input_time_hrs.value || input_time_min.value || input_time_sec.value){
-          if(input_dist.value){
+      } else if (input_pace_hrs.value || input_pace_min.value || input_pace_sec.value) {
+        if (input_dist.value || input_time_hrs.value || input_time_min.value || input_time_sec.value) {
+          if (input_dist.value) {
             outputTimeByPace();
-          }
-          else if(input_time_hrs.value || input_time_min.value || input_time_sec.value){
+          } else if (input_time_hrs.value || input_time_min.value || input_time_sec.value) {
             outputDistanceByPace();
-          }
-          else{
+          } else {
             alert("Please enter a valid distance or time");
           }
-        }
-        else{
+        } else {
           alert("Please enter a valid distance or time");
         }
-      }
-      else{
+      } else {
         alert("Please enter a valid speed or pace");
       }
-    }
-    else{
+    } else {
       alert("Please enter only numbers");
       //does not work if dist field contains numbers and time fields contain strings and vice-versa
     }
   }
 
-  function outputTimeBySpeed(){
+  function outputTimeBySpeed() {
     distance = parseFloat(input_dist.value);
-    if(isNaN(distance) || distance <= 0){
+    if (isNaN(distance) || distance <= 0) {
       alert("please enter a valid distance");
-    }
-    else{
+    } else {
       speed = parseFloat(input_speed.value);
-      if(isNaN(speed) || speed <= 0){
+      if (isNaN(speed) || speed <= 0) {
         alert("please enter a valid speed");
-      }
-      else{
+      } else {
         convertSpeed();
         convertDistance();
         time = kilometers / kph;
+        time_sec = time * 3600;
         convertTime();
         showConversions();
       }
     }
   }
 
-  function outputTimeByPace(){
+  function outputTimeByPace() {
     distance = parseFloat(input_dist.value);
-    if(isNaN(distance) || distance <= 0){
+    if (isNaN(distance) || distance <= 0) {
       alert("please enter a valid distance");
-    }
-    else{
+    } else {
       pace = convertToHours(input_pace_hrs, input_pace_min, input_pace_sec);
-      if(pace <= 0){
+      if (pace <= 0) {
         alert("please enter a valid pace");
-      }
-      else{
+      } else {
         convertPaceToSpeed();
         convertDistance();
         time = kilometers / kph;
+        time_sec = time * 3600;
         convertTime();
         showConversions();
       }
     }
   }
 
-  function outputDistanceBySpeed(){
+  function outputDistanceBySpeed() {
     time = convertToHours(input_time_hrs, input_time_min, input_time_sec);
-    if(time <= 0){
+    time_sec = convertToSeconds(input_time_hrs, input_time_min, input_time_sec);
+    if (time <= 0) {
       alert("please enter a valid time")
-    }
-    else{
+    } else {
       speed = parseFloat(input_speed.value);
-      if(isNaN(speed) || speed <= 0){
+      if (isNaN(speed) || speed <= 0) {
         alert("please enter a valid speed");
-      }
-      else{
-        convertSpeed();
-        convertTime();
-        miles = time * mph;
-        kilometers = time * kph;
-        yards = miles / y2m;
-        meters = kilometers * 1000;
-        showConversions();
-      }
-    }
-  }
-
-  function outputDistanceByPace(){
-    time = convertToHours(input_time_hrs, input_time_min, input_time_sec);
-    if(time <= 0){
-      alert("please enter a valid time")
-    }
-    else{
-      pace = convertToHours(input_pace_hrs, input_pace_min, input_pace_sec);
-      if(pace <= 0){
-        alert("please enter a valid pace");
-      }
-      else{
+      } else {
         convertPaceToSpeed();
         convertTime();
         miles = time * mph;
@@ -258,19 +219,39 @@ function initCalc(){
     }
   }
 
-  function outputPace(){
+  function outputDistanceByPace() {
+    time = convertToHours(input_time_hrs, input_time_min, input_time_sec);
+    time_sec = convertToSeconds(input_time_hrs, input_time_min, input_time_sec);
+    if (time <= 0) {
+      alert("please enter a valid time")
+    } else {
+      pace = convertToHours(input_pace_hrs, input_pace_min, input_pace_sec);
+      if (pace <= 0) {
+        alert("please enter a valid pace");
+      } else {
+        convertPaceToSpeed();
+        convertTime();
+        miles = time * mph;
+        kilometers = time * kph;
+        yards = miles / y2m;
+        meters = kilometers * 1000;
+        showConversions();
+      }
+    }
+  }
+
+  function outputPace() {
     //console.log(input_dist.value, input_dist_units.value, input_speed.value, input_speed_units.value, input_pace_hrs.value, input_pace_min.value, input_pace_sec.value, input_pace_units.value, input_time_hrs.value, input_time_min.value, input_time_sec.value);
 
     distance = parseFloat(input_dist.value);
-    if(isNaN(distance) || distance <= 0){
+    if (isNaN(distance) || distance <= 0) {
       alert("please enter a valid distance");
-    }
-    else{
+    } else {
       time = convertToHours(input_time_hrs, input_time_min, input_time_sec);
-      if(time <= 0){
+      time_sec = convertToSeconds(input_time_hrs, input_time_min, input_time_sec);
+      if (time <= 0) {
         alert("please enter a valid time");
-      }
-      else{
+      } else {
         convertDistance();
         convertTime();
         showConversions();
@@ -283,19 +264,20 @@ function initCalc(){
 
   // -------------------------- HELPERS ---------------------------- //
 
-  function showConversions(){
+  function showConversions() {
     mph = miles / time;
     kph = mph * m2k;
     mpm = time / miles * 60; // in minutes (not hours:mins:sec)
     mpk = mpm * k2m;
     mp100m = mpk * 0.1;
     mp100yd = mpm * y2m * 100;
+    mps = kph * 0.277777777778; // TODO: check math (is this block redundant?)
 
     // time
     var min = Math.round(minutes);
     var sec = roundOff(seconds);
-    if(min < 10) min = "0" + min;
-    if(sec < 10) sec = "0" + sec;
+    if (min < 10) min = "0" + min;
+    if (sec < 10) sec = "0" + sec;
     output_time.innerHTML = hours + ":" + min + ":" + sec;
 
     // standard
@@ -311,62 +293,61 @@ function initCalc(){
     output_kph.innerHTML = roundOff(kph) + " " + output_kph.data;
     output_mpk.innerHTML = formatPace(mpk) + " " + output_mpk.data; // mins per km
     output_mp100m.innerHTML = formatPace(mp100m) + " " + output_mp100m.data; // mins per 100 meters
+
+    // meters per second
+    console.log(mps + ' mps');
+    console.log(time_sec + ' seconds');
   }
 
-  function convertSpeed(){
+  function convertSpeed() {
     speed_units = input_speed_units.value;
-    if(speed_units == "mph"){
+    if (speed_units == "mph") {
       mph = speed;
       kph = mph * m2k;
-    }
-    else{
+    } else {
       kph = speed;
       mph = kph * k2m;
     }
+    mps = kph * 0.277777777778; // TODO: check math
   }
 
-  function convertPaceToSpeed(){
+  function convertPaceToSpeed() {
     var minpace = pace * 60; // pace in minutes
     pace_units = input_pace_units.value;
-    if(pace_units == "mpm"){
+    if (pace_units == "mpm") {
       mph = 60 / minpace;
       kph = mph * m2k;
-    }
-    else if(pace_units == "mpk"){
+    } else if (pace_units == "mpk") {
       kph = 60 / minpace;
       mph = kph * k2m;
-    }
-    else if(pace_units == "mp100yd"){
+    } else if (pace_units == "mp100yd") {
       mph = (1 / minpace) * 3.40909091;
       kph = mph * m2k;
-    }
-    else if(pace_units == "mp100m"){
+    } else if (pace_units == "mp100m") {
       kph = (1 / minpace) * 6;
       mph = kph * k2m;
     }
+    mps = kph * 0.277777777778; // TODO: check math
   }
 
-  function convertDistance(){
+  function convertDistance() {
     dist_units = input_dist_units.value;
-    if(dist_units == "mi"){
+    if (dist_units == "mi") {
       miles = distance;
       kilometers = miles * m2k;
       yards = miles / y2m;
       meters = kilometers * 1000;
-    }
-    else if(dist_units == "km"){
+    } else if (dist_units == "km") {
       kilometers = distance;
       miles = kilometers * k2m;
       yards = miles / y2m;
       meters = kilometers * 1000;
-    }
-    else if(dist_units == "yd"){
+    } else if (dist_units == "yd") {
       yards = distance;
       miles = yards * y2m;
       kilometers = miles * m2k;
       meters = kilometers * 1000;
-    }
-    else{
+    } else {
       meters = distance;
       kilometers = meters * 0.001;
       miles = kilometers * k2m;
@@ -374,70 +355,69 @@ function initCalc(){
     }
   }
 
-  function convertTime(){
+  function convertTime() {
     hours = Math.floor(time);
     minutes = Math.floor((time * 60) % 60);
     seconds = (time * 3600) % 60;
   }
 
-  function convertToSeconds(input_hrs, input_min, input_sec){
+  function convertToSeconds(input_hrs, input_min, input_sec) {
     var hrs = parseFloat(input_hrs.value) * 3600;
     var min = parseFloat(input_min.value) * 60;
     var sec = parseFloat(input_sec.value);
-    if(isNaN(hrs)){
+    if (isNaN(hrs)) {
       hrs = 0;
       input_hrs.value = 0;
     }
-    if(isNaN(min)){
+    if (isNaN(min)) {
       min = 0;
       input_min.value = 0;
     }
-    if(isNaN(sec)){
+    if (isNaN(sec)) {
       sec = 0;
       input_sec.value = 0;
     }
     return hrs + min + sec; // returns time in seconds (3:07:30 = 11250)
   }
 
-  function convertToHours(input_hrs, input_min, input_sec){
+  function convertToHours(input_hrs, input_min, input_sec) {
     var hrs = parseFloat(input_hrs.value);
     var min = parseFloat(input_min.value) / 60;
     var sec = parseFloat(input_sec.value) / 3600;
-    if(isNaN(hrs)){
+    if (isNaN(hrs)) {
       hrs = 0;
       input_hrs.value = 0;
     }
-    if(isNaN(min)){
+    if (isNaN(min)) {
       min = 0;
       input_min.value = 0;
     }
-    if(isNaN(sec)){
+    if (isNaN(sec)) {
       sec = 0;
       input_sec.value = 0;
     }
     return hrs + min + sec; // returns time in hours (3:07:30 = 3.125)
   }
 
-  function roundOff(num){
+  function roundOff(num) {
     num *= 100;
     num = Math.round(num);
     num /= 100; // for some reason *= .01 sometimes puts ...0000000001 at the end???
     return num;
   }
 
-  function formatPace(min_per_unit){
+  function formatPace(min_per_unit) {
     var sec = roundOff(min_per_unit * 60);
     var min = Math.floor(sec / 60);
     var hrs = Math.floor(sec / 3600);
     sec = roundOff(sec % 60);
-    if(sec < 10) {
+    if (sec < 10) {
       sec = "0" + sec;
     }
-    if(hrs < 1){
+    if (hrs < 1) {
       return min + ":" + sec;
-    }
-    else{
-      if(min < 10) {
+    } else {
+      if (min < 10) {
         min = "0" + min;
       }
       return hrs + ":" + min + ":" + sec;

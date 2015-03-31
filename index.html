@@ -2,12 +2,13 @@
 <html lang="en" manifest="cache.manifest">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="pacecalc.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes"> <!-- Android -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Pace Calc">
+    <link rel="stylesheet" type="text/css" href="pacecalc.css">
     <link rel="shortcut icon" sizes="196x196" href="icons/apple-touch-icon-180x180.png"> <!-- Android -->
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="76x76" href="icons/apple-touch-icon-76x76.png">
@@ -59,7 +60,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan=3><input type="submit" value="Calculate" id="btn_calculate">&nbsp&nbsp<input type="submit" value="Clear All" id="btn_clear"></td>
+        <td colspan=3><input type="submit" value="Calculate" id="btn_calculate"><input type="submit" value="Clear All" id="btn_clear"></td>
       </tr>
       <tr>
         <td colspan=3><hr></td>
@@ -100,7 +101,6 @@
     </table>
   </div>
 
-<script language="Javascript" type="text/javascript" src="pacecalc.js"></script>
-<!--script language="Javascript" type="text/javascript" src="prefixfree.min.js"></script--> <!-- PrefixFree util automatically handles browser prefixes like -moz-, -webkit- etc -->
+<script src="pacecalc.js"></script>
 </body>
 </html>

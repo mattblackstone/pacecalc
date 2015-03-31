@@ -1,10 +1,7 @@
-/* Basic reset */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	
-	/* Better text styling */
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 300;
 	font-size: 14px;
@@ -37,7 +34,7 @@ h2 {
 	
 	margin: 50px auto;
 	
-	background: #9dd2ea;
+	background: #bbb;
 	background: linear-gradient(#ccc, #aaa);
 	border-radius: 4px;
 	border: 1px solid #999;
@@ -84,6 +81,7 @@ input[type=number] {
 }
 
 input[type=submit] {
+	margin-right: 10px;
 	background: linear-gradient(#ddd, #b0b0b0);
 }
 
